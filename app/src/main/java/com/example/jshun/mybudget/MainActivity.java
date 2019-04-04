@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Toolbar toolbar = (Toolbar) findViewById(R.menu.toolbar_map);
 
-        Button finishedButton = findViewById(R.id.incomeButton);
-        finishedButton.setEnabled(true);
-        finishedButton.setOnClickListener(new View.OnClickListener() {
+        Button incomeButton = findViewById(R.id.incomeButton);
+        incomeButton.setEnabled(true);
+        incomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
-                //Toast toast = Toast.makeText(getApplicationContext(), "Finished!!!", Toast.LENGTH_LONG);
-                //toast.show();
+//                Toast toast = Toast.makeText(getApplicationContext(), "Finished!!!", Toast.LENGTH_LONG);
+//                toast.show();
                 Intent i = new Intent(MainActivity.this, Pop.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("ROW", "");
