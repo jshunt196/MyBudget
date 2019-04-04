@@ -2,7 +2,7 @@ package com.example.jshun.mybudget;
 
 import java.util.Date;
 
-public class BudgetItem {
+public class BudgetItem implements Comparable<BudgetItem> {
     private float amount;
     private String category;
     private Date date;
@@ -29,5 +29,10 @@ public class BudgetItem {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(BudgetItem o) {
+        return getDate().compareTo(o.getDate());
     }
 }
