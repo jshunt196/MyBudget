@@ -23,6 +23,7 @@ public class Pop extends Activity {
         EditText titleName = findViewById(R.id.titleEdit);
         if (!venName.equals(null)) {
             titleName.setText(venName);
+
         }
 
         DisplayMetrics dm = new DisplayMetrics();
