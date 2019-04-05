@@ -21,6 +21,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     Toolbar mActionBarToolbar;
 
+    
+
     ArrayList<String> incomes = new ArrayList<>();
     ArrayList<String> semesterExpense = new ArrayList<>();
     ArrayList<String> expenses = new ArrayList<>();

@@ -7,6 +7,8 @@ public class BudgetItem implements Comparable<BudgetItem> {
     private String category;
     private Date date;
 
+
+
     public float getAmount() {
         return amount;
     }
