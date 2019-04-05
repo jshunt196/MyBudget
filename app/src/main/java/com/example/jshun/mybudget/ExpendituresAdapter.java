@@ -22,12 +22,13 @@ import java.util.ArrayList;
 public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapter.ViewHolder> {
     private static final String TAG = "ExpensesAdapter";
 
-    private ArrayList<String> catagoryNames = new ArrayList<>();
     private Context context;
+    UserSingleton mySingleton = UserSingleton.Instance();
+    ArrayList<BudgetItem> listItems;
 
-    public ExpendituresAdapter(Context myContext, ArrayList<String> myCatagoryNames) {
+    public ExpendituresAdapter(Context myContext, ArrayList<BudgetItem> listItems) {
         this.context = myContext;
-        this.catagoryNames = myCatagoryNames;
+        this.listItems = listItems;
     }
 
     @NonNull
@@ -41,20 +42,19 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Log.d(TAG, "OnBindViewHolder: called");
-        UserSingleton mySingleton = UserSingleton.Instance();
         ArrayList<String> catagoryName = new ArrayList<>();
         ArrayList<Float> catagoryAmount = new ArrayList<>();
-        for (BudgetItem j : mySingleton.oneTimeExpenses) {
+        for (BudgetItem j : mySingleton.recurringExpenses) {
             catagoryName.add(j.getCategory());
             catagoryAmount.add(j.getAmount());
 //            System.out.println(j.getCategory());
         }
 
-//        viewHolder.expName.setText(catagoryName.get(i));
+        viewHolder.expName.setText(listItems.get(i).getCategory());
         viewHolder.expSpend.setText("yoyoyo");
-        viewHolder.expAllocate.setText("$200");
+        viewHolder.expAllocate.setText(String.valueOf(listItems.get(i).getAmount()));
         viewHolder.expRemaining.setText("$200");
-        final String rowNames = catagoryNames.get(i);
+//        final String rowNames = catagoryNames.get(i);
 
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
 
     @Override
     public int getItemCount() {
-        return catagoryNames.size();
+        return mySingleton.recurringExpenses.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
