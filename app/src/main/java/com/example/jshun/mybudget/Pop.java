@@ -54,11 +54,7 @@ public class Pop extends Activity {
                     amount = amount * -1;
                 }
                 //create budget item and send it to the singleton
-                Log.d("pop", "contents below");
-                Log.d(title,amountText.getText().toString());
-                BudgetItem newItem = new BudgetItem();
-                newItem.setCategory(title);
-                newItem.setAmount(amount);
+                BudgetItem newItem = new BudgetItem(title, amount);
                 theStuff.oneTimeExpenses.add(newItem);
                 finish();
             }
