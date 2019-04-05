@@ -27,74 +27,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@color/colorPrimaryDark"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="2"
-                    android:text="Income:"
-                    android:textColor="@android:color/background_light" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/incomeButton"
-                    android:layout_width="86dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Add Category" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/incomeRecycle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@color/colorPrimaryDark"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/semester"
-                    android:layout_width="15dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
-                    android:text="Semester Expenses:"
+                    android:text="One-Time Semester Budget Items:"
                     android:textColor="@android:color/background_light" />
 
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/semesterButton"
-                    android:layout_width="40dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Add Category" />
+                    android:text="Add Item" />
 
             </LinearLayout>
 
@@ -122,23 +74,18 @@
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="15dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
-                    android:text="Monthly Expenses:"
+                    android:text="Monthly Budget Categories:"
                     android:textColor="@android:color/background_light" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
 
                 <Button
                     android:id="@+id/monthlyButton"
-                    android:layout_width="43dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Add Category" />
