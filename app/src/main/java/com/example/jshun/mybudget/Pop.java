@@ -16,6 +16,7 @@ public class Pop extends Activity {
     String title;
     Float amount;
     Boolean isExpense;
+    UserSingleton theStuff = UserSingleton.Instance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class Pop extends Activity {
         }
 
         final EditText amountText = findViewById(R.id.amountEdit);
-        amountText.setText("0");
+        //amountText.setText("0");
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -55,6 +56,10 @@ public class Pop extends Activity {
                 //create budget item and send it to the singleton
                 Log.d("pop", "contents below");
                 Log.d(title,amountText.getText().toString());
+                BudgetItem newItem = new BudgetItem();
+                newItem.setCategory(title);
+                newItem.setAmount(amount);
+                theStuff.oneTimeExpenses.add(newItem);
                 finish();
             }
         });

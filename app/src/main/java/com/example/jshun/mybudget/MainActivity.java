@@ -21,14 +21,15 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     Toolbar mActionBarToolbar;
 
-    
+    UserSingleton theStuff = UserSingleton.Instance();
 
-    ArrayList<String> incomes = new ArrayList<>();
-    ArrayList<String> semesterExpense = new ArrayList<>();
-    ArrayList<String> expenses = new ArrayList<>();
+    ArrayList<BudgetItem> oneTimeExpenses = theStuff.getOneTimeExpenses();
+    ArrayList<BudgetItem> recurringExpenses = theStuff.getRecurringExpenses();
+
     private static final String TAG = "MainActivity";
 
     public MainActivity() {
+        /*
         incomes.add("Monthly Income");
         incomes.add("External Support");
         incomes.add("Student Loans");
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         expenses.add("School");
         expenses.add("Clothing");
         expenses.add("Recreational");
+        */
     }
 
     @Override
@@ -53,21 +55,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started");
 
         //Toolbar toolbar = (Toolbar) findViewById(R.menu.toolbar_map);
-
-        Button incomeButton = findViewById(R.id.incomeButton);
-        incomeButton.setEnabled(true);
-        incomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view1) {
-//                Toast toast = Toast.makeText(getApplicationContext(), "Finished!!!", Toast.LENGTH_LONG);
-//                toast.show();
-                Intent i = new Intent(MainActivity.this, Pop.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("ROW", "");
-                i.putExtras(bundle);
-                startActivity(i);
-            }
-        });
 
         Button semesterButton = findViewById(R.id.semesterButton);
         semesterButton.setEnabled(true);
@@ -119,19 +106,19 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.toolbar_map, menu);
     }*/
 
+    private void refreshData(){
+
+    }
+
     private void initRecyclers() {
         Log.d(TAG, "initRecycler: init");
-//////////////////////////////////////////////// FINISH INCOME RECYCLE
-        RecyclerView recyclerIncome = findViewById(R.id.incomeRecycle);
-        recyclerIncome.setAdapter(new IncomeAdapter(this, incomes));
-        recyclerIncome.setLayoutManager(new LinearLayoutManager(this));
 
         RecyclerView recyclerSemester = findViewById(R.id.semesterRecycle);
-        recyclerSemester.setAdapter(new ExpensesAdapter(this, semesterExpense));
+        recyclerSemester.setAdapter(new ExpensesAdapter(this, oneTimeExpenses));
         recyclerSemester.setLayoutManager(new LinearLayoutManager(this));
 
         RecyclerView recyclerExpense = findViewById(R.id.expensesRecycle);
-        recyclerExpense.setAdapter(new ExpensesAdapter(this, expenses));
+        recyclerExpense.setAdapter(new ExpensesAdapter(this, recurringExpenses));
         recyclerExpense.setLayoutManager(new LinearLayoutManager(this));
     }
 }

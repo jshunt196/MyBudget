@@ -6,8 +6,8 @@ public class UserSingleton {
 
     private static UserSingleton instance;
 
-    private ArrayList<BudgetItem> oneTimeExpenses;
-    private ArrayList<BudgetItem> recurringExpenses;
+    public ArrayList<BudgetItem> oneTimeExpenses;
+    public ArrayList<BudgetItem> recurringExpenses;
     private ArrayList<String> Categories;
 
     public ArrayList<BudgetItem> getOneTimeExpenses() {

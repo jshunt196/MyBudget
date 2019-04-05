@@ -18,11 +18,11 @@ import java.util.ArrayList;
 public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHolder> {
     private static final String TAG = "ExpensesAdapter";
 
-    private ArrayList<String> catagoryNames = new ArrayList<>();
+    private ArrayList<BudgetItem> listItems;
     private Context context;
 
-    public ExpensesAdapter(Context myContext, ArrayList<String> catagoryNames) {
-        this.catagoryNames = catagoryNames;
+    public ExpensesAdapter(Context myContext, ArrayList<BudgetItem> listItems) {
+        this.listItems = listItems;
         this.context = myContext;
     }
 
@@ -38,9 +38,9 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Log.d(TAG, "OnBindViewHolder: called");
 
-        viewHolder.catagoryName.setText(catagoryNames.get(i) + ": $");
-        viewHolder.catagoryAmount.setText("0.00");
-        final String rowNames = catagoryNames.get(i);
+        viewHolder.itemTitle.setText(listItems.get(i).getCategory() + ": $");
+        viewHolder.itemAmount.setText(String.valueOf(listItems.get(i).getAmount()));
+        final String rowNames = listItems.get(i).getCategory();
 
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
             }
         });
 
-        viewHolder.catagoryAdd.setOnClickListener(new View.OnClickListener() {
+        viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
                 Intent i = new Intent(context, Pop.class);
@@ -68,21 +68,21 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return catagoryNames.size();
+        return listItems.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView catagoryName;
-        TextView catagoryAmount;
-        Button catagoryAdd;
+        TextView itemTitle;
+        TextView itemAmount;
+        Button editButton;
         LinearLayout myRow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            catagoryName = itemView.findViewById(R.id.catName);
-            catagoryAmount = itemView.findViewById(R.id.catAmount);
-            catagoryAdd = itemView.findViewById(R.id.addCat);
+            itemTitle = itemView.findViewById(R.id.catName);
+            itemAmount = itemView.findViewById(R.id.catAmount);
+            editButton = itemView.findViewById(R.id.buttonEdit);
             myRow = itemView.findViewById(R.id.expenseRow);
         }
     }
