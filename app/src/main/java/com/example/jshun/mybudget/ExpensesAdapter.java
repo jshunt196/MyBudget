@@ -1,5 +1,6 @@
 package com.example.jshun.mybudget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,27 +21,32 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
 
     private ArrayList<BudgetItem> listItems;
     private Context context;
+    private Boolean once;
 
-    public ExpensesAdapter(Context myContext, ArrayList<BudgetItem> listItems) {
+    Context mContext;
+
+    public ExpensesAdapter(Context myContext, ArrayList<BudgetItem> listItems, boolean once) {
         this.listItems = listItems;
         this.context = myContext;
+        this.once = once;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.expenses_layout, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int pos) {
         Log.d(TAG, "OnBindViewHolder: called");
 
-        viewHolder.itemTitle.setText(listItems.get(i).getCategory() + ": $");
-        viewHolder.itemAmount.setText(String.valueOf(listItems.get(i).getAmount()));
-        final String rowNames = listItems.get(i).getCategory();
+        viewHolder.itemTitle.setText(listItems.get(pos).getCategory() + ": $");
+        viewHolder.itemAmount.setText(String.valueOf(listItems.get(pos).getAmount()));
+        final String rowNames = listItems.get(pos).getCategory();
 
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,9 +54,12 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
                 Intent i = new Intent(context, Pop.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("ROW", rowNames);
-
+                bundle.putBoolean("once", once);
+                bundle.putInt("index", pos);
                 i.putExtras(bundle);
-                context.startActivity(i);
+                ((Activity)mContext).startActivityForResult(i, 0);
+                //startActivityForResult(i, 0);
+                //context.startActivity(i);
             }
         });
 
@@ -60,8 +69,11 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
                 Intent i = new Intent(context, Pop.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("ROW", rowNames);
+                bundle.putBoolean("once", once);
+                bundle.putInt("index", pos);
                 i.putExtras(bundle);
-                context.startActivity(i);
+                ((Activity)mContext).startActivityForResult(i, 0);
+                //context.startActivity(i);
             }
         });
 
