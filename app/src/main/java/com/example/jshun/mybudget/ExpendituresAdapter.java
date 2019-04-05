@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -38,8 +41,17 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Log.d(TAG, "OnBindViewHolder: called");
+        UserSingleton mySingleton = UserSingleton.Instance();
+        ArrayList<String> catagoryName = new ArrayList<>();
+        ArrayList<Float> catagoryAmount = new ArrayList<>();
+        for (BudgetItem j : mySingleton.oneTimeExpenses) {
+            catagoryName.add(j.getCategory());
+            catagoryAmount.add(j.getAmount());
+//            System.out.println(j.getCategory());
+        }
 
-        viewHolder.expSpend.setText(catagoryNames.get(i));
+//        viewHolder.expName.setText(catagoryName.get(i));
+        viewHolder.expSpend.setText("yoyoyo");
         viewHolder.expAllocate.setText("$200");
         viewHolder.expRemaining.setText("$200");
         final String rowNames = catagoryNames.get(i);
@@ -66,6 +78,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView expName;
         TextView expSpend;
         TextView expAllocate;
         TextView expRemaining;
@@ -73,6 +86,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            expName = itemView.findViewById(R.id.expenditureName);
             expSpend = itemView.findViewById(R.id.expSpent);
             expAllocate = itemView.findViewById(R.id.expAllocate);
             expRemaining = itemView.findViewById(R.id.expRemain);

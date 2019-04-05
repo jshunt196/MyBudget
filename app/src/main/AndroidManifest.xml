@@ -27,6 +27,9 @@
         <activity android:name=".TransactionsActivity"
             android:theme="@style/AppTheme.CustomeTheme"
             ></activity>
+        <activity android:name=".AddTransactionFrag"
+            android:theme="@style/AppTheme.CustomeTheme"
+            ></activity>
     </application>
 
 </manifest>
