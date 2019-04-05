@@ -13,6 +13,10 @@ import android.widget.TextView;
 
 public class Pop extends Activity {
 
+    boolean isOnce;
+    int arrayIndex;
+
+
     String title;
     Float amount;
     Boolean isExpense;
@@ -20,21 +24,42 @@ public class Pop extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("Pop", "onCreate start");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.pop_layout);
 
         Bundle bundle = getIntent().getExtras();
-        String venName = bundle.getString("ROW");
+        Log.d("Pop bundle size", Integer.toString(bundle.size()));
+
+        isOnce = bundle.getBoolean("once");
+        arrayIndex = bundle.getInt("index", -1);
+
+        Log.d("Pop", "got bundle");
+        BudgetItem editMe = null;
+
+        if (arrayIndex > -1){
+            if (isOnce){
+                editMe = theStuff.oneTimeExpenses.get(arrayIndex);
+            }
+            else{
+                editMe = theStuff.recurringExpenses.get(arrayIndex);
+            }
+        }
+        Log.d("Pop", "got item from singleton");
 
         final EditText titleName = findViewById(R.id.titleEdit);
-        if (!venName.equals(null)) {
-            titleName.setText(venName);
-
+        if (!(editMe==null)) {
+            titleName.setText(editMe.getCategory());
         }
 
         final EditText amountText = findViewById(R.id.amountEdit);
-        //amountText.setText("0");
+        if (!(editMe==null)) {
+            amountText.setText(String.valueOf(editMe.getAmount()));
+        }
+        else {
+            amountText.setText(String.valueOf((float) 0.00));
+        }
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -51,11 +76,36 @@ public class Pop extends Activity {
                 title = titleName.getText().toString();
                 amount = Float.parseFloat(amountText.getText().toString());
                 if(isExpense){
-                    amount = amount * -1;
+                    if (amount > 0){
+                        amount = amount * -1;
+                    }
                 }
-                //create budget item and send it to the singleton
-                BudgetItem newItem = new BudgetItem(title, amount);
-                theStuff.oneTimeExpenses.add(newItem);
+                BudgetItem iHateJava;
+                //if we already have a thing we put that back
+                if(arrayIndex > -1){
+                    if(isOnce){
+                        iHateJava = theStuff.oneTimeExpenses.get(arrayIndex);
+                        iHateJava.setCategory(title);
+                        iHateJava.setAmount(amount);
+                    }
+                    else{
+                        iHateJava = theStuff.recurringExpenses.get(arrayIndex);
+                        iHateJava.setCategory(title);
+                        iHateJava.setAmount(amount);
+                    }
+                }
+                else{
+                    //create budget item and send it to the singleton
+                    iHateJava = new BudgetItem(title, amount);
+                    if(isOnce){
+                        theStuff.oneTimeExpenses.add(iHateJava);
+                    }
+                    else{
+                        theStuff.recurringExpenses.add(iHateJava);
+                    }
+
+                }
+
                 finish();
             }
         });
