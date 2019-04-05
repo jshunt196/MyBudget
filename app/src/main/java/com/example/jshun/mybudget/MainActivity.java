@@ -97,6 +97,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button finishedButton = findViewById(R.id.finishedButton);
+        finishedButton.setEnabled(true);
+        finishedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view1) {
+                //Toast toast = Toast.makeText(getApplicationContext(), "Finished!!!", Toast.LENGTH_LONG);
+                //toast.show();
+                Intent i = new Intent(MainActivity.this, TransactionsActivity.class);
+                startActivity(i);
+            }
+        });
+
         initRecyclers();
 
         /*Button incomeButton = findViewById(R.id.incomeButton);

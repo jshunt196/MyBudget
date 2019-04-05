@@ -7,7 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toolbar;
 
 import java.util.ArrayList;
@@ -15,8 +18,18 @@ import java.util.ArrayList;
 import static android.support.constraint.Constraints.TAG;
 
 public class TransactionsActivity extends AppCompatActivity {
-    public TransactionsActivity() {
+    ArrayList<String> catagories = new ArrayList<>();
 
+    public TransactionsActivity() {
+        catagories.add("Housing");
+        catagories.add("Gas");
+        catagories.add("Other Stuff!!");
+        catagories.add("Other Stuff!!");
+        catagories.add("Other Stuff!!");
+        catagories.add("Other Stuff!!");
+        catagories.add("Other Stuff!!");
+        catagories.add("Other Stuff!!");
+        catagories.add("Other Stuff!!");
     }
 
     @Override
@@ -24,12 +37,15 @@ public class TransactionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // TODO: stuff here!
-        // setContentView(R.layout.activity_main);
+        setContentView(R.layout.transactions_activity);
+
+        RecyclerView recyclerExpenditures = findViewById(R.id.expRecycler);
+        recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, catagories));
+        recyclerExpenditures.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.toolbar_map, menu);
-    }*/
+    public void initRecyclers() {
+        // TODO: build this!!
+    }
+
 }
