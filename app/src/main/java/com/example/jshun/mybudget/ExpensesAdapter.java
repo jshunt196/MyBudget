@@ -48,6 +48,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
                 Intent i = new Intent(context, Pop.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("ROW", rowNames);
+
                 i.putExtras(bundle);
                 context.startActivity(i);
             }

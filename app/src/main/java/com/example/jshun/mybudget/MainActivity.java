@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 //toast.show();
                 Intent i = new Intent(MainActivity.this, Pop.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("ROW", "");
+                bundle.putBoolean("once", true);
+                bundle.putInt("index", -1);
                 i.putExtras(bundle);
                 startActivity(i);
             }
@@ -80,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 //toast.show();
                 Intent i = new Intent(MainActivity.this, Pop.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("ROW", "");
+                bundle.putBoolean("once", false);
+                bundle.putInt("index", -1);
                 i.putExtras(bundle);
                 startActivity(i);
             }

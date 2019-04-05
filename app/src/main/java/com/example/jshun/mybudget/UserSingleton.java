@@ -37,6 +37,18 @@ public class UserSingleton {
     private UserSingleton(){
         oneTimeExpenses = new ArrayList<BudgetItem>();
         recurringExpenses = new ArrayList<BudgetItem>();
+        //create dummy data
+        //tuition, job, rent, food
+        BudgetItem tuition = new BudgetItem("Tuition", (float) -2500.00);
+        oneTimeExpenses.add(tuition);
+        BudgetItem berks = new BudgetItem("Books", (float) -200.00);
+        oneTimeExpenses.add(berks);
+        BudgetItem job = new BudgetItem("Work", (float) 800.00);
+        recurringExpenses.add(job);
+        BudgetItem rent = new BudgetItem("Rent", (float) -350.00);
+        recurringExpenses.add(rent);
+        BudgetItem food = new BudgetItem("Food", (float) -200.00);
+        recurringExpenses.add(food);
     }
 
     public static UserSingleton Instance(){
