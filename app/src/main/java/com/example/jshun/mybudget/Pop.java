@@ -56,6 +56,16 @@ public class Pop extends Activity {
         final EditText amountText = findViewById(R.id.amountEdit);
         if (!(editMe==null)) {
             amountText.setText(String.valueOf(editMe.getAmount()));
+            if (editMe.getAmount() >= 0){
+                RadioButton inc = (RadioButton) findViewById(R.id.radio_income);
+                inc.setChecked(true);
+                isExpense = false;
+            }
+            else{
+                RadioButton exp = (RadioButton) findViewById(R.id.radio_expense);
+                exp.setChecked(true);
+                isExpense = true;
+            }
         }
         else {
             amountText.setText(String.valueOf((float) 0.00));

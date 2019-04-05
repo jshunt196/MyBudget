@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<BudgetItem> oneTimeExpenses = theStuff.getOneTimeExpenses();
     ArrayList<BudgetItem> recurringExpenses = theStuff.getRecurringExpenses();
 
+    ExpensesAdapter oneTimeAdapter;
+    ExpensesAdapter recurringAdapter;
+
     private static final String TAG = "MainActivity";
 
     public MainActivity() {
@@ -46,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         expenses.add("Recreational");
         */
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putBoolean("once", true);
                 bundle.putInt("index", -1);
                 i.putExtras(bundle);
-                startActivity(i);
+                startActivityForResult(i, 0);
+                //startActivity(i);
             }
         });
 
@@ -84,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putBoolean("once", false);
                 bundle.putInt("index", -1);
                 i.putExtras(bundle);
-                startActivity(i);
+                startActivityForResult(i, 0);
+                //startActivity(i);
             }
         });
 
@@ -128,11 +135,20 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "initRecycler: init");
 
         RecyclerView recyclerSemester = findViewById(R.id.semesterRecycle);
-        recyclerSemester.setAdapter(new ExpensesAdapter(this, oneTimeExpenses));
+        recyclerSemester.setAdapter(new ExpensesAdapter(this, oneTimeExpenses, true));
         recyclerSemester.setLayoutManager(new LinearLayoutManager(this));
 
         RecyclerView recyclerExpense = findViewById(R.id.expensesRecycle);
-        recyclerExpense.setAdapter(new ExpensesAdapter(this, recurringExpenses));
+        recyclerExpense.setAdapter(new ExpensesAdapter(this, recurringExpenses, false));
         recyclerExpense.setLayoutManager(new LinearLayoutManager(this));
+
+        oneTimeAdapter = (ExpensesAdapter) recyclerSemester.getAdapter();
+        recurringAdapter = (ExpensesAdapter) recyclerExpense.getAdapter();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        oneTimeAdapter.notifyDataSetChanged();
+        recurringAdapter.notifyDataSetChanged();
     }
 }
