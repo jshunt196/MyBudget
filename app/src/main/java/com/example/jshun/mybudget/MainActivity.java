@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     UserSingleton theStuff = UserSingleton.Instance();
 
-    ArrayList<BudgetItem> oneTimeExpenses = theStuff.getOneTimeExpenses();
-    ArrayList<BudgetItem> recurringExpenses = theStuff.getRecurringExpenses();
+    ArrayList<BudgetItem> incomeCategories = theStuff.getIncomeCategories();
+    ArrayList<BudgetItem> expenseCategories = theStuff.getExpenseCategories();
 
     ExpensesAdapter oneTimeAdapter;
     ExpensesAdapter recurringAdapter;
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Toolbar toolbar = (Toolbar) findViewById(R.menu.toolbar_map);
 
-        Button semesterButton = findViewById(R.id.semesterButton);
+        Button semesterButton = findViewById(R.id.incomeButton);
         semesterButton.setEnabled(true);
         semesterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button monthlyButton = findViewById(R.id.monthlyButton);
+        Button monthlyButton = findViewById(R.id.expenseButton);
         monthlyButton.setEnabled(true);
         monthlyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,12 +134,12 @@ public class MainActivity extends AppCompatActivity {
     private void initRecyclers() {
         Log.d(TAG, "initRecycler: init");
 
-        RecyclerView recyclerSemester = findViewById(R.id.semesterRecycle);
-        recyclerSemester.setAdapter(new ExpensesAdapter(this, oneTimeExpenses, true));
+        RecyclerView recyclerSemester = findViewById(R.id.incomeRecycle);
+        recyclerSemester.setAdapter(new ExpensesAdapter(this, incomeCategories, true));
         recyclerSemester.setLayoutManager(new LinearLayoutManager(this));
 
         RecyclerView recyclerExpense = findViewById(R.id.expensesRecycle);
-        recyclerExpense.setAdapter(new ExpensesAdapter(this, recurringExpenses, false));
+        recyclerExpense.setAdapter(new ExpensesAdapter(this, expenseCategories, false));
         recyclerExpense.setLayoutManager(new LinearLayoutManager(this));
 
         oneTimeAdapter = (ExpensesAdapter) recyclerSemester.getAdapter();

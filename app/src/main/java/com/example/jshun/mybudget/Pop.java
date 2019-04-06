@@ -40,10 +40,10 @@ public class Pop extends Activity {
 
         if (arrayIndex > -1){
             if (isOnce){
-                editMe = theStuff.oneTimeExpenses.get(arrayIndex);
+                editMe = theStuff.incomeCategories.get(arrayIndex);
             }
             else{
-                editMe = theStuff.recurringExpenses.get(arrayIndex);
+                editMe = theStuff.expenseCategories.get(arrayIndex);
             }
         }
         Log.d("Pop", "got item from singleton");
@@ -94,12 +94,12 @@ public class Pop extends Activity {
                 //if we already have a thing we put that back
                 if(arrayIndex > -1){
                     if(isOnce){
-                        iHateJava = theStuff.oneTimeExpenses.get(arrayIndex);
+                        iHateJava = theStuff.incomeCategories.get(arrayIndex);
                         iHateJava.setCategory(title);
                         iHateJava.setAmount(amount);
                     }
                     else{
-                        iHateJava = theStuff.recurringExpenses.get(arrayIndex);
+                        iHateJava = theStuff.expenseCategories.get(arrayIndex);
                         iHateJava.setCategory(title);
                         iHateJava.setAmount(amount);
                     }
@@ -108,10 +108,10 @@ public class Pop extends Activity {
                     //create budget item and send it to the singleton
                     iHateJava = new BudgetItem(title, amount);
                     if(isOnce){
-                        theStuff.oneTimeExpenses.add(iHateJava);
+                        theStuff.incomeCategories.add(iHateJava);
                     }
                     else{
-                        theStuff.recurringExpenses.add(iHateJava);
+                        theStuff.expenseCategories.add(iHateJava);
                     }
 
                 }

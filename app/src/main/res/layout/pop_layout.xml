@@ -40,16 +40,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <RadioButton android:id="@+id/radio_income"
+
+            <RadioButton
+                android:id="@+id/radio_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Income"
-                android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/radio_expense"
+                android:onClick="onRadioButtonClicked"
+                android:text="One-time" />
+
+            <RadioButton
+                android:id="@+id/radio_expense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Expense"
-                android:onClick="onRadioButtonClicked"/>
+                android:onClick="onRadioButtonClicked"
+                android:text="Monthly" />
         </RadioGroup>
 
         <LinearLayout

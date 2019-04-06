@@ -44,7 +44,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
         Log.d(TAG, "OnBindViewHolder: called");
         ArrayList<String> catagoryName = new ArrayList<>();
         ArrayList<Float> catagoryAmount = new ArrayList<>();
-        for (BudgetItem j : mySingleton.recurringExpenses) {
+        for (BudgetItem j : mySingleton.expenseCategories) {
             catagoryName.add(j.getCategory());
             catagoryAmount.add(j.getAmount());
 //            System.out.println(j.getCategory());
@@ -73,7 +73,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
 
     @Override
     public int getItemCount() {
-        return mySingleton.recurringExpenses.size();
+        return mySingleton.expenseCategories.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

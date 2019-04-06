@@ -21,7 +21,8 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create Your Budget" />
+                android:layout_marginLeft="10dp"
+                android:text="Create Your Budget. Add incomes and expenses either on a one-time or monthly basis." />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,23 +31,23 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/semester"
+                    android:id="@+id/income"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
-                    android:text="One-Time Semester Budget Items:"
+                    android:text="Incomes for the Semester:"
                     android:textColor="@android:color/background_light" />
 
 
                 <Button
-                    android:id="@+id/semesterButton"
+                    android:id="@+id/incomeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Add Item" />
+                    android:text="Add Income" />
 
             </LinearLayout>
 
@@ -56,7 +57,7 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/semesterRecycle"
+                    android:id="@+id/incomeRecycle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -80,15 +81,15 @@
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
                     android:gravity="left|center_vertical"
-                    android:text="Monthly Budget Categories:"
+                    android:text="Expenses for the Semester:"
                     android:textColor="@android:color/background_light" />
 
                 <Button
-                    android:id="@+id/monthlyButton"
+                    android:id="@+id/expenseButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Add Category" />
+                    android:text="Add Expense" />
 
             </LinearLayout>
 

@@ -6,49 +6,40 @@ public class UserSingleton {
 
     private static UserSingleton instance;
 
-    public ArrayList<BudgetItem> oneTimeExpenses;
-    public ArrayList<BudgetItem> recurringExpenses;
-    private ArrayList<String> Categories;
+    public ArrayList<BudgetItem> incomeCategories;
+    public ArrayList<BudgetItem> expenseCategories;
 
-    public ArrayList<BudgetItem> getOneTimeExpenses() {
-        return oneTimeExpenses;
+    public ArrayList<BudgetItem> getIncomeCategories() {
+        return incomeCategories;
     }
 
-    public void setOneTimeExpenses(ArrayList<BudgetItem> oneTimeExpenses) {
-        this.oneTimeExpenses = oneTimeExpenses;
+    public void getIncomeCategories(ArrayList<BudgetItem> oneTimeExpenses) {
+        this.incomeCategories = oneTimeExpenses;
     }
 
-    public ArrayList<BudgetItem> getRecurringExpenses() {
-        return recurringExpenses;
+    public ArrayList<BudgetItem> getExpenseCategories() {
+        return expenseCategories;
     }
 
-    public void setRecurringExpenses(ArrayList<BudgetItem> recurringExpenses) {
-        this.recurringExpenses = recurringExpenses;
-    }
-
-    public ArrayList<String> getCategories() {
-        return Categories;
-    }
-
-    public void setCategories(ArrayList<String> categories) {
-        Categories = categories;
+    public void setExpenseCategories(ArrayList<BudgetItem> recurringExpenses) {
+        this.expenseCategories = recurringExpenses;
     }
 
     private UserSingleton(){
-        oneTimeExpenses = new ArrayList<BudgetItem>();
-        recurringExpenses = new ArrayList<BudgetItem>();
+        incomeCategories = new ArrayList<BudgetItem>();
+        expenseCategories = new ArrayList<BudgetItem>();
         //create dummy data
         //tuition, job, rent, food
-        BudgetItem tuition = new BudgetItem("Tuition", (float) -2500.00);
-        oneTimeExpenses.add(tuition);
-        BudgetItem berks = new BudgetItem("Books", (float) -200.00);
-        oneTimeExpenses.add(berks);
+        BudgetItem tuition = new BudgetItem("Tuition", (float) 2500.00);
+        expenseCategories.add(tuition);
+        BudgetItem berks = new BudgetItem("Books", (float) 200.00);
+        expenseCategories.add(berks);
         BudgetItem job = new BudgetItem("Work", (float) 800.00);
-        recurringExpenses.add(job);
-        BudgetItem rent = new BudgetItem("Rent", (float) -350.00);
-        recurringExpenses.add(rent);
-        BudgetItem food = new BudgetItem("Food", (float) -200.00);
-        recurringExpenses.add(food);
+        incomeCategories.add(job);
+        BudgetItem rent = new BudgetItem("Rent", (float) 350.00);
+        expenseCategories.add(rent);
+        BudgetItem food = new BudgetItem("Food", (float) 200.00);
+        expenseCategories.add(food);
     }
 
     public static UserSingleton Instance(){

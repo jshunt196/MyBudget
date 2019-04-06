@@ -20,8 +20,8 @@ import static android.support.constraint.Constraints.TAG;
 public class TransactionsActivity extends AppCompatActivity {
     ArrayList<String> catagories = new ArrayList<>();
     UserSingleton theStuff = UserSingleton.Instance();
-    ArrayList<BudgetItem> oneTimeExpenses = theStuff.getOneTimeExpenses();
-    ArrayList<BudgetItem> recurringExpenses = theStuff.getRecurringExpenses();
+    ArrayList<BudgetItem> oneTimeExpenses = theStuff.getIncomeCategories();
+    ArrayList<BudgetItem> expenseCategories = theStuff.getExpenseCategories();
 
     public TransactionsActivity() {
         catagories.add("Housing");
@@ -43,7 +43,7 @@ public class TransactionsActivity extends AppCompatActivity {
         setContentView(R.layout.transactions_activity);
 
         RecyclerView recyclerExpenditures = findViewById(R.id.expRecycler);
-        recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, recurringExpenses));
+        recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, expenseCategories));
         recyclerExpenditures.setLayoutManager(new LinearLayoutManager(this));
     }
 
