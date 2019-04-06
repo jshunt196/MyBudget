@@ -45,7 +45,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
         Log.d(TAG, "OnBindViewHolder: called");
 
         viewHolder.itemTitle.setText(listItems.get(pos).getCategory() + ": $");
-        viewHolder.itemAmount.setText(String.valueOf(listItems.get(pos).getAmount()));
+        viewHolder.itemAmount.setText(String.valueOf(listItems.get(pos).getAmount()) + " per semester");
         final String rowNames = listItems.get(pos).getCategory();
 
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {

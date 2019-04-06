@@ -16,10 +16,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AddTransactionFrag extends Activity implements AdapterView.OnItemSelectedListener {
+    UserSingleton theStuff = UserSingleton.Instance();
+    private List<String> expensesCategories = new ArrayList<String>();;
 
     public AddTransactionFrag() {
-        // Required empty public constructor
+        for (BudgetItem i : theStuff.getExpenseCategories()) {
+            expensesCategories.add(i.getCategory());
+        }
     }
 
     @Override
@@ -29,8 +36,7 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
         setContentView(R.layout.add_transaction_layout);
 
         Spinner spinner = findViewById(R.id.categorySpin);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource
-                (this, R.array.transactionCatagories, android.R.layout.simple_spinner_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, expensesCategories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(AddTransactionFrag.this);
@@ -56,7 +62,7 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String textStuff = adapterView.getItemAtPosition(i).toString();
-        Toast toast = Toast.makeText(this, textStuff, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, "Selected " + textStuff, Toast.LENGTH_LONG);
         toast.show();
     }
 

@@ -51,7 +51,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
         }
 
         viewHolder.expName.setText(listItems.get(i).getCategory());
-        viewHolder.expSpend.setText("yoyoyo");
+        viewHolder.expSpend.setText("$0");
         viewHolder.expAllocate.setText(String.valueOf(listItems.get(i).getAmount()));
         viewHolder.expRemaining.setText("$200");
 //        final String rowNames = catagoryNames.get(i);

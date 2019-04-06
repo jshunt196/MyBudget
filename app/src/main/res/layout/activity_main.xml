@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Create Your Budget. Add incomes and expenses either on a one-time or monthly basis." />
+                android:text="Create your budget for the semester. Add incomes and expenses either on a one-time or monthly basis." />
 
             <LinearLayout
                 android:layout_width="match_parent"

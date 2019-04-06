@@ -24,15 +24,7 @@ public class TransactionsActivity extends AppCompatActivity {
     ArrayList<BudgetItem> expenseCategories = theStuff.getExpenseCategories();
 
     public TransactionsActivity() {
-        catagories.add("Housing");
-        catagories.add("Gas");
-        catagories.add("Other Stuff!!");
-        catagories.add("Other Stuff!!");
-        catagories.add("Other Stuff!!");
-        catagories.add("Other Stuff!!");
-        catagories.add("Other Stuff!!");
-        catagories.add("Other Stuff!!");
-        catagories.add("Other Stuff!!");
+
     }
 
     @Override
@@ -45,6 +37,18 @@ public class TransactionsActivity extends AppCompatActivity {
         RecyclerView recyclerExpenditures = findViewById(R.id.expRecycler);
         recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, expenseCategories));
         recyclerExpenditures.setLayoutManager(new LinearLayoutManager(this));
+
+        Button addTransactionButton = findViewById(R.id.addTransactionButton);
+        addTransactionButton.setEnabled(true);
+        addTransactionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view1) {
+                //Toast toast = Toast.makeText(getApplicationContext(), "Finished!!!", Toast.LENGTH_LONG);
+                //toast.show();
+                Intent i = new Intent(TransactionsActivity.this, AddTransactionFrag.class);
+                startActivity(i);
+            }
+        });
     }
 
     public void initRecyclers() {

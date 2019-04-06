@@ -19,7 +19,7 @@ public class Pop extends Activity {
 
     String title;
     Float amount;
-    Boolean isExpense;
+    Boolean isMonthly;
     UserSingleton theStuff = UserSingleton.Instance();
 
     @Override
@@ -57,14 +57,14 @@ public class Pop extends Activity {
         if (!(editMe==null)) {
             amountText.setText(String.valueOf(editMe.getAmount()));
             if (editMe.getAmount() >= 0){
-                RadioButton inc = (RadioButton) findViewById(R.id.radio_income);
+                RadioButton inc = (RadioButton) findViewById(R.id.radio_onetime);
                 inc.setChecked(true);
-                isExpense = false;
+                isMonthly = false;
             }
             else{
-                RadioButton exp = (RadioButton) findViewById(R.id.radio_expense);
+                RadioButton exp = (RadioButton) findViewById(R.id.radio_monthly);
                 exp.setChecked(true);
-                isExpense = true;
+                isMonthly = true;
             }
         }
         else {
@@ -85,10 +85,8 @@ public class Pop extends Activity {
             public void onClick(View view1) {
                 title = titleName.getText().toString();
                 amount = Float.parseFloat(amountText.getText().toString());
-                if(isExpense){
-                    if (amount > 0){
-                        amount = amount * -1;
-                    }
+                if(isMonthly){
+                    amount = amount * 4;
                 }
                 BudgetItem iHateJava;
                 //if we already have a thing we put that back
@@ -134,13 +132,13 @@ public class Pop extends Activity {
 
         // Check which radio button was clicked
         switch(view.getId()) {
-            case R.id.radio_income:
+            case R.id.radio_onetime:
                 if (checked)
-                    isExpense = false;
+                    isMonthly = false;
                     break;
-            case R.id.radio_expense:
+            case R.id.radio_monthly:
                 if (checked)
-                    isExpense = true;
+                    isMonthly = true;
                     break;
         }
     }

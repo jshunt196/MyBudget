@@ -6,6 +6,7 @@ public class BudgetItem implements Comparable<BudgetItem> {
     private float amount;
     private String category;
     private Date date;
+    private boolean monthly;
 
     public BudgetItem() {
     }
@@ -38,6 +39,10 @@ public class BudgetItem implements Comparable<BudgetItem> {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public boolean getFrequency() { return monthly; }
+
+    public void setFrequency(boolean isMonthly) { monthly = isMonthly; }
 
     @Override
     public int compareTo(BudgetItem o) {
