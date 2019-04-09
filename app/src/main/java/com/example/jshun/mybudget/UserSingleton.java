@@ -31,16 +31,18 @@ public class UserSingleton {
         //create dummy data
         //tuition, job, rent, food
         BudgetItem tuition = new BudgetItem("Tuition", (float) 2500.00);
+        tuition.setFrequency(false);
         expenseCategories.add(tuition);
         BudgetItem berks = new BudgetItem("Books", (float) 200.00);
+        tuition.setFrequency(false);
         expenseCategories.add(berks);
-        BudgetItem job = new BudgetItem("Work", (float) 800.00);
+        BudgetItem job = new BudgetItem("Work", (float) 3200.00);
         job.setFrequency(true);
         incomeCategories.add(job);
-        BudgetItem rent = new BudgetItem("Rent", (float) 350.00);
+        BudgetItem rent = new BudgetItem("Rent", (float) 1400.00);
         rent.setFrequency(true);
         expenseCategories.add(rent);
-        BudgetItem food = new BudgetItem("Food", (float) 200.00);
+        BudgetItem food = new BudgetItem("Food", (float) 800.00);
         food.setFrequency(true);
         expenseCategories.add(food);
     }
