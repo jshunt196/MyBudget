@@ -24,6 +24,9 @@
         <activity android:name=".Pop"
             android:theme="@style/AppTheme.CustomeTheme"
             ></activity>
+        <activity android:name=".DeleteConfirm"
+            android:theme="@style/AppTheme.CustomeTheme"
+            ></activity>
         <activity android:name=".TransactionsActivity"
             android:theme="@style/AppTheme.CustomeTheme"
             ></activity>
