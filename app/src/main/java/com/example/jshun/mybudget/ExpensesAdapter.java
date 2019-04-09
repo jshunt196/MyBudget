@@ -48,10 +48,12 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
         viewHolder.itemAmount.setText(String.valueOf(listItems.get(pos).getAmount()) + " per semester");
         //true is monthly, false is one-time
         if (listItems.get(pos).getFrequency()){
-            viewHolder.recurringText.setText("monthly");
+            //viewHolder.recurringText.setText("monthly");
+            viewHolder.recurringText.setText("");
         }
         else {
-            viewHolder.recurringText.setText("one-time");
+            //viewHolder.recurringText.setText("one-time");
+            viewHolder.recurringText.setText("");
         }
         final String rowNames = listItems.get(pos).getCategory();
 
