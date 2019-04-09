@@ -100,16 +100,19 @@ public class Pop extends Activity {
                         iHateJava = theStuff.incomeCategories.get(arrayIndex);
                         iHateJava.setCategory(title);
                         iHateJava.setAmount(amount);
+                        iHateJava.setFrequency(isMonthly);
                     }
                     else{
                         iHateJava = theStuff.expenseCategories.get(arrayIndex);
                         iHateJava.setCategory(title);
                         iHateJava.setAmount(amount);
+                        iHateJava.setFrequency(isMonthly);
                     }
                 }
                 else{
                     //create budget item and send it to the singleton
                     iHateJava = new BudgetItem(title, amount);
+                    iHateJava.setFrequency(isMonthly);
                     if(isOnce){
                         theStuff.incomeCategories.add(iHateJava);
                     }
@@ -123,7 +126,7 @@ public class Pop extends Activity {
             }
         });
 
-        Button cancelButton =findViewById(R.id.buttonCancel);
+        Button cancelButton = findViewById(R.id.buttonCancel);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
