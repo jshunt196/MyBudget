@@ -35,10 +35,13 @@ public class UserSingleton {
         BudgetItem berks = new BudgetItem("Books", (float) 200.00);
         expenseCategories.add(berks);
         BudgetItem job = new BudgetItem("Work", (float) 800.00);
+        job.setFrequency(true);
         incomeCategories.add(job);
         BudgetItem rent = new BudgetItem("Rent", (float) 350.00);
+        rent.setFrequency(true);
         expenseCategories.add(rent);
         BudgetItem food = new BudgetItem("Food", (float) 200.00);
+        food.setFrequency(true);
         expenseCategories.add(food);
     }
 

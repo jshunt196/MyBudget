@@ -21,6 +21,7 @@ public class Pop extends Activity {
     Float amount;
     Boolean isMonthly;
     UserSingleton theStuff = UserSingleton.Instance();
+    Button saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,9 @@ public class Pop extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.pop_layout);
+
+        saveButton = findViewById(R.id.buttonSave);
+        saveButton.setEnabled(false);
 
         Bundle bundle = getIntent().getExtras();
         Log.d("Pop bundle size", Integer.toString(bundle.size()));
@@ -59,11 +63,13 @@ public class Pop extends Activity {
             if (editMe.getAmount() >= 0){
                 RadioButton inc = (RadioButton) findViewById(R.id.radio_onetime);
                 inc.setChecked(true);
+                saveButton.setEnabled(true);
                 isMonthly = false;
             }
             else{
                 RadioButton exp = (RadioButton) findViewById(R.id.radio_monthly);
                 exp.setChecked(true);
+                saveButton.setEnabled(true);
                 isMonthly = true;
             }
         }
@@ -79,7 +85,6 @@ public class Pop extends Activity {
 
         getWindow().setLayout((int)(width*.7),(int)(width*.7));
 
-        Button saveButton = findViewById(R.id.buttonSave);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
@@ -135,10 +140,12 @@ public class Pop extends Activity {
             case R.id.radio_onetime:
                 if (checked)
                     isMonthly = false;
+                    saveButton.setEnabled(true);
                     break;
             case R.id.radio_monthly:
                 if (checked)
                     isMonthly = true;
+                    saveButton.setEnabled(true);
                     break;
         }
     }

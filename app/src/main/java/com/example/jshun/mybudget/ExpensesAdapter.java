@@ -46,8 +46,16 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
 
         viewHolder.itemTitle.setText(listItems.get(pos).getCategory() + ": $");
         viewHolder.itemAmount.setText(String.valueOf(listItems.get(pos).getAmount()) + " per semester");
+        //true is monthly, false is one-time
+        if (listItems.get(pos).getFrequency()){
+            viewHolder.recurringText.setText("monthly");
+        }
+        else {
+            viewHolder.recurringText.setText("one-time");
+        }
         final String rowNames = listItems.get(pos).getCategory();
 
+        /*
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,12 +69,28 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
                 //startActivityForResult(i, 0);
                 //context.startActivity(i);
             }
-        });
+        });*/
 
         viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
+                Log.d("ExpAdpt", "editButton clickListener fired");
                 Intent i = new Intent(context, Pop.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ROW", rowNames);
+                bundle.putBoolean("once", once);
+                bundle.putInt("index", pos);
+                i.putExtras(bundle);
+                ((Activity)mContext).startActivityForResult(i, 0);
+                //context.startActivity(i);
+            }
+        });
+
+        viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view1) {
+                Log.d("ExpAdpt", "deketeButton clickListener fired");
+                Intent i = new Intent(context, DeleteConfirm.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("ROW", rowNames);
                 bundle.putBoolean("once", once);
@@ -88,15 +112,19 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
 
         TextView itemTitle;
         TextView itemAmount;
+        TextView recurringText;
         Button editButton;
+        Button deleteButton;
         LinearLayout myRow;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemTitle = itemView.findViewById(R.id.catName);
             itemAmount = itemView.findViewById(R.id.catAmount);
+            recurringText = itemView.findViewById(R.id.catRecurring);
             editButton = itemView.findViewById(R.id.buttonEdit);
             myRow = itemView.findViewById(R.id.expenseRow);
+            deleteButton = itemView.findViewById(R.id.buttonDelete);
         }
     }
 }
