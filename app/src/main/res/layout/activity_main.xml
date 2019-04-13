@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -47,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/colorButtonNeutral"
                     android:text="Add Income" />
 
             </LinearLayout>
@@ -89,6 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/colorButtonNeutral"
                     android:text="Add Expense" />
 
             </LinearLayout>
@@ -107,6 +110,7 @@
                 android:id="@+id/finishedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorButtonConfirm"
                 android:text="Done" />
 
         </LinearLayout>
