@@ -64,9 +64,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
 //                bundle.putString("ROW", rowNames);
 //                i.putExtras(bundle);
 //                context.startActivity(i);
-                Toast toast = Toast.makeText(context, "You're so cool!", Toast.LENGTH_LONG);
-                toast.show();
-                context.startActivity(new Intent(context, AddTransactionFrag.class));
+                context.startActivity(new Intent(context, TransactionHistory.class));
             }
         });
     }

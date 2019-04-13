@@ -46,7 +46,7 @@ public class Pop extends Activity {
             if (isOnce){
                 editMe = theStuff.incomeCategories.get(arrayIndex);
             }
-            else{
+            else {
                 editMe = theStuff.expenseCategories.get(arrayIndex);
             }
         }

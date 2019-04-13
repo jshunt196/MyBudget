@@ -62,7 +62,7 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String textStuff = adapterView.getItemAtPosition(i).toString();
-        Toast toast = Toast.makeText(this, "Selected " + textStuff, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, "Selected " + textStuff, Toast.LENGTH_SHORT);
         toast.show();
     }
 

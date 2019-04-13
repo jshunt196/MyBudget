@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="178dp">
 
@@ -16,7 +18,7 @@
             android:id="@+id/textView12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="Category" />
 
         <Spinner
             android:id="@+id/categorySpin"

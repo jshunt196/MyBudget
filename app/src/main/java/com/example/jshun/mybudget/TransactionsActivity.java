@@ -3,6 +3,7 @@ package com.example.jshun.mybudget;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,6 +38,9 @@ public class TransactionsActivity extends AppCompatActivity {
         RecyclerView recyclerExpenditures = findViewById(R.id.expRecycler);
         recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, expenseCategories));
         recyclerExpenditures.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerExpenditures.addItemDecoration(itemDecoration);
 
         Button addTransactionButton = findViewById(R.id.addTransactionButton);
         addTransactionButton.setEnabled(true);

@@ -33,6 +33,9 @@
         <activity android:name=".AddTransactionFrag"
             android:theme="@style/AppTheme.CustomeTheme"
             ></activity>
+        <activity android:name=".TransactionHistory"
+            android:theme="@style/AppTheme.CustomeTheme"
+            ></activity>
     </application>
 
 </manifest>
