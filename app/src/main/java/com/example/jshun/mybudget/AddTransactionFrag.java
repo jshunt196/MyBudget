@@ -12,16 +12,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class AddTransactionFrag extends Activity implements AdapterView.OnItemSelectedListener {
     UserSingleton theStuff = UserSingleton.Instance();
     private List<String> expensesCategories = new ArrayList<String>();;
+    private Date calendarDate;
 
     public AddTransactionFrag() {
         for (BudgetCategory i : theStuff.getExpenseCategories()) {
@@ -35,16 +39,35 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
 
         setContentView(R.layout.add_transaction_layout);
 
+        final EditText description = findViewById(R.id.descriptionTran);
+        final EditText amount = findViewById(R.id.amountTran);
+        CalendarView date = (CalendarView) findViewById(R.id.calendarView);
+        date.setOnDateChangeListener( new CalendarView.OnDateChangeListener() {
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                calendarDate = new Date( year, month, dayOfMonth );
+            }
+        });
+
         Spinner spinner = findViewById(R.id.categorySpin);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, expensesCategories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(AddTransactionFrag.this);
+        final String spinnerString = spinner.getSelectedItem().toString();
 
         Button saveButton = findViewById(R.id.saveTransaction);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
+                transactionItem newItem = new transactionItem();
+                newItem.setName(description.getText().toString());
+                newItem.setAmount(Float.valueOf(amount.getText().toString()));
+                newItem.setDate(calendarDate);
+                for (BudgetCategory myItem : theStuff.getExpenseCategories()) {
+                    if (myItem.getCategoryName() == spinnerString) {
+                        myItem.addTransaction(newItem);
+                    }
+                }
                 finish();
             }
         });

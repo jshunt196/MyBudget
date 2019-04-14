@@ -57,6 +57,10 @@ public class TransactionHistory extends AppCompatActivity {
         budget = bundle.getString("Budget");
 
         TextView categoryName = findViewById(R.id.categoryExp);
+        TextView categorySpent = findViewById(R.id.spentCat);
+        TextView categoryBudget = findViewById(R.id.budgetCat);
         categoryName.setText(title);
+        categorySpent.setText(spent);
+        categoryBudget.setText(budget);
     }
 }
