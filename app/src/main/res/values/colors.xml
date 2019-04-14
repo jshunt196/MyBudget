@@ -5,7 +5,10 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBackground">#e3e2df</color>
     <color name="colorPrimaryLight">#919EFF</color>
-    <color name="colorButtonConfirm">#00994d</color>
+    <!-- this is the green one
+    <color name="colorButtonConfirm">#8000994d</color>
+    -->
+    <color name="colorButtonConfirm">#dff79e02</color>
     <color name="colorButtonDelete">#80cc0000</color>
-    <color name="colorButtonNeutral">#f79e02</color>
+    <color name="colorButtonNeutral">#cdf79e02</color>
 </resources>
