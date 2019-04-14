@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     UserSingleton theStuff = UserSingleton.Instance();
 
-    ArrayList<BudgetItem> incomeCategories = theStuff.getIncomeCategories();
-    ArrayList<BudgetItem> expenseCategories = theStuff.getExpenseCategories();
+    ArrayList<BudgetCategory> incomeCategories = theStuff.getIncomeCategories();
+    ArrayList<BudgetCategory> expenseCategories = theStuff.getExpenseCategories();
 
     ExpensesAdapter oneTimeAdapter;
     ExpensesAdapter recurringAdapter;
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 //toast.show();
                 Intent i = new Intent(MainActivity.this, Pop.class);
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("once", true);
+                bundle.putBoolean("income", true);
                 bundle.putInt("index", -1);
                 i.putExtras(bundle);
                 startActivityForResult(i, 0);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 //toast.show();
                 Intent i = new Intent(MainActivity.this, Pop.class);
                 Bundle bundle = new Bundle();
-                bundle.putBoolean("once", false);
+                bundle.putBoolean("income", false);
                 bundle.putInt("index", -1);
                 i.putExtras(bundle);
                 startActivityForResult(i, 0);

@@ -13,13 +13,13 @@ import android.widget.TextView;
 
 public class Pop extends Activity {
 
-    boolean isOnce;
+    boolean isIncome;
     int arrayIndex;
 
 
     String title;
-    Float amount;
-    Boolean isMonthly;
+    float amount;
+    boolean isMonthly;
     UserSingleton theStuff = UserSingleton.Instance();
     Button saveButton;
 
@@ -36,14 +36,14 @@ public class Pop extends Activity {
         Bundle bundle = getIntent().getExtras();
         Log.d("Pop bundle size", Integer.toString(bundle.size()));
 
-        isOnce = bundle.getBoolean("once");
+        isIncome = bundle.getBoolean("income");
         arrayIndex = bundle.getInt("index", -1);
 
         Log.d("Pop", "got bundle");
-        BudgetItem editMe = null;
+        BudgetCategory editMe = null;
 
         if (arrayIndex > -1){
-            if (isOnce){
+            if (isIncome){
                 editMe = theStuff.incomeCategories.get(arrayIndex);
             }
             else {
@@ -54,23 +54,21 @@ public class Pop extends Activity {
 
         final EditText titleName = findViewById(R.id.titleEdit);
         if (!(editMe==null)) {
-            titleName.setText(editMe.getCategory());
+            titleName.setText(editMe.getCategoryName());
         }
 
         final EditText amountText = findViewById(R.id.amountEdit);
         if (!(editMe==null)) {
-            amountText.setText(String.valueOf(editMe.getAmount()));
-            if (editMe.getAmount() >= 0){
-                RadioButton inc = (RadioButton) findViewById(R.id.radio_onetime);
-                inc.setChecked(true);
+            amountText.setText(String.valueOf(editMe.getTotalAmount()));
+            if (editMe.isMonthly()){
+                RadioButton monthly = (RadioButton) findViewById(R.id.radio_monthly);
+                monthly.setChecked(true);
                 saveButton.setEnabled(true);
-                isMonthly = false;
             }
             else{
-                RadioButton exp = (RadioButton) findViewById(R.id.radio_monthly);
-                exp.setChecked(true);
+                RadioButton one_time = (RadioButton) findViewById(R.id.radio_onetime);
+                one_time.setChecked(true);
                 saveButton.setEnabled(true);
-                isMonthly = true;
             }
         }
         else {
@@ -90,30 +88,37 @@ public class Pop extends Activity {
             public void onClick(View view1) {
                 title = titleName.getText().toString();
                 amount = Float.parseFloat(amountText.getText().toString());
-                if(isMonthly){
-                    amount = amount * 4;
-                }
-                BudgetItem iHateJava;
+                BudgetCategory iHateJava;
                 //if we already have a thing we put that back
                 if(arrayIndex > -1){
-                    if(isOnce){
+                    if(isIncome){
                         iHateJava = theStuff.incomeCategories.get(arrayIndex);
-                        iHateJava.setCategory(title);
-                        iHateJava.setAmount(amount);
-                        iHateJava.setFrequency(isMonthly);
+                        iHateJava.setCategoryName(title);
+                        iHateJava.setMonthly(isMonthly);
+                        if(isMonthly){
+                            iHateJava.setMonthlyAmount(amount);
+                        }
+                        else{
+                            iHateJava.setTotalAmount(amount);
+                        }
+
                     }
                     else{
                         iHateJava = theStuff.expenseCategories.get(arrayIndex);
-                        iHateJava.setCategory(title);
-                        iHateJava.setAmount(amount);
-                        iHateJava.setFrequency(isMonthly);
+                        iHateJava.setCategoryName(title);
+                        iHateJava.setMonthly(isMonthly);
+                        if(isMonthly){
+                            iHateJava.setMonthlyAmount(amount);
+                        }
+                        else{
+                            iHateJava.setTotalAmount(amount);
+                        }
                     }
                 }
                 else{
                     //create budget item and send it to the singleton
-                    iHateJava = new BudgetItem(title, amount);
-                    iHateJava.setFrequency(isMonthly);
-                    if(isOnce){
+                    iHateJava = new BudgetCategory(title, isMonthly, amount);
+                    if(isIncome){
                         theStuff.incomeCategories.add(iHateJava);
                     }
                     else{

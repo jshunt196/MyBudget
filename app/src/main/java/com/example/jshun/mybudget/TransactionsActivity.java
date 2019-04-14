@@ -21,8 +21,8 @@ import static android.support.constraint.Constraints.TAG;
 public class TransactionsActivity extends AppCompatActivity {
     ArrayList<String> catagories = new ArrayList<>();
     UserSingleton theStuff = UserSingleton.Instance();
-    ArrayList<BudgetItem> oneTimeExpenses = theStuff.getIncomeCategories();
-    ArrayList<BudgetItem> expenseCategories = theStuff.getExpenseCategories();
+    ArrayList<BudgetCategory> oneTimeExpenses = theStuff.getIncomeCategories();
+    ArrayList<BudgetCategory> expenseCategories = theStuff.getExpenseCategories();
 
     public TransactionsActivity() {
 

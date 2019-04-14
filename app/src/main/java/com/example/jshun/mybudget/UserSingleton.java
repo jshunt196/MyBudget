@@ -6,44 +6,39 @@ public class UserSingleton {
 
     private static UserSingleton instance;
 
-    public ArrayList<BudgetItem> incomeCategories;
-    public ArrayList<BudgetItem> expenseCategories;
+    public ArrayList<BudgetCategory> incomeCategories;
+    public ArrayList<BudgetCategory> expenseCategories;
 
-    public ArrayList<BudgetItem> getIncomeCategories() {
+    public ArrayList<BudgetCategory> getIncomeCategories() {
         return incomeCategories;
     }
 
-    public void getIncomeCategories(ArrayList<BudgetItem> oneTimeExpenses) {
+    public void getIncomeCategories(ArrayList<BudgetCategory> oneTimeExpenses) {
         this.incomeCategories = oneTimeExpenses;
     }
 
-    public ArrayList<BudgetItem> getExpenseCategories() {
+    public ArrayList<BudgetCategory> getExpenseCategories() {
         return expenseCategories;
     }
 
-    public void setExpenseCategories(ArrayList<BudgetItem> recurringExpenses) {
+    public void setExpenseCategories(ArrayList<BudgetCategory> recurringExpenses) {
         this.expenseCategories = recurringExpenses;
     }
 
     private UserSingleton(){
-        incomeCategories = new ArrayList<BudgetItem>();
-        expenseCategories = new ArrayList<BudgetItem>();
+        incomeCategories = new ArrayList<BudgetCategory>();
+        expenseCategories = new ArrayList<BudgetCategory>();
         //create dummy data
         //tuition, job, rent, food
-        BudgetItem tuition = new BudgetItem("Tuition", (float) 2500.00);
-        tuition.setFrequency(false);
+        BudgetCategory tuition = new BudgetCategory("Tuition", false, (float)2500.00);
         expenseCategories.add(tuition);
-        BudgetItem berks = new BudgetItem("Books", (float) 200.00);
-        tuition.setFrequency(false);
+        BudgetCategory berks = new BudgetCategory("Books", false, (float)200.00);
         expenseCategories.add(berks);
-        BudgetItem job = new BudgetItem("Work", (float) 3200.00);
-        job.setFrequency(true);
+        BudgetCategory job = new BudgetCategory("Work", true,(float)850.00);
         incomeCategories.add(job);
-        BudgetItem rent = new BudgetItem("Rent", (float) 1400.00);
-        rent.setFrequency(true);
+        BudgetCategory rent = new BudgetCategory("Rent", true, (float)350.00);
         expenseCategories.add(rent);
-        BudgetItem food = new BudgetItem("Food", (float) 800.00);
-        food.setFrequency(true);
+        BudgetCategory food = new BudgetCategory("Food", true, (float)200.00);
         expenseCategories.add(food);
     }
 

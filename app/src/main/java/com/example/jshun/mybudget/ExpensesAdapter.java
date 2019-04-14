@@ -19,16 +19,16 @@ import java.util.ArrayList;
 public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHolder> {
     private static final String TAG = "ExpensesAdapter";
 
-    private ArrayList<BudgetItem> listItems;
+    private ArrayList<BudgetCategory> listItems;
     private Context context;
-    private Boolean once;
+    private Boolean isIncome;
 
     Context mContext;
 
-    public ExpensesAdapter(Context myContext, ArrayList<BudgetItem> listItems, boolean once) {
+    public ExpensesAdapter(Context myContext, ArrayList<BudgetCategory> listItems, boolean expense) {
         this.listItems = listItems;
         this.context = myContext;
-        this.once = once;
+        this.isIncome = expense;
     }
 
     @NonNull
@@ -44,10 +44,10 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int pos) {
         Log.d(TAG, "OnBindViewHolder: called");
 
-        viewHolder.itemTitle.setText(listItems.get(pos).getCategory() + ": $");
-        viewHolder.itemAmount.setText(String.valueOf(listItems.get(pos).getAmount()) + " per semester");
+        viewHolder.itemTitle.setText(listItems.get(pos).getCategoryName() + ": $");
+        viewHolder.itemAmount.setText(String.valueOf(listItems.get(pos).getTotalAmount()) + " per semester");
         //true is monthly, false is one-time
-        if (listItems.get(pos).getFrequency()){
+        if (listItems.get(pos).isMonthly()){
             //viewHolder.recurringText.setText("monthly");
             viewHolder.recurringText.setText("");
         }
@@ -55,7 +55,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
             //viewHolder.recurringText.setText("one-time");
             viewHolder.recurringText.setText("");
         }
-        final String rowNames = listItems.get(pos).getCategory();
+        final String rowNames = listItems.get(pos).getCategoryName();
 
         /*
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +80,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
                 Intent i = new Intent(context, Pop.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("ROW", rowNames);
-                bundle.putBoolean("once", once);
+                bundle.putBoolean("income", isIncome);
                 bundle.putInt("index", pos);
                 i.putExtras(bundle);
                 ((Activity)mContext).startActivityForResult(i, 0);
@@ -95,7 +95,7 @@ public class ExpensesAdapter extends RecyclerView.Adapter<ExpensesAdapter.ViewHo
                 Intent i = new Intent(context, DeleteConfirm.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("ROW", rowNames);
-                bundle.putBoolean("once", once);
+                bundle.putBoolean("income", isIncome);
                 bundle.putInt("index", pos);
                 i.putExtras(bundle);
                 ((Activity)mContext).startActivityForResult(i, 0);

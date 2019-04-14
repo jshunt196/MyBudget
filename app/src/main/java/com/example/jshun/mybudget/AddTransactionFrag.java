@@ -24,8 +24,8 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
     private List<String> expensesCategories = new ArrayList<String>();;
 
     public AddTransactionFrag() {
-        for (BudgetItem i : theStuff.getExpenseCategories()) {
-            expensesCategories.add(i.getCategory());
+        for (BudgetCategory i : theStuff.getExpenseCategories()) {
+            expensesCategories.add(i.getCategoryName());
         }
     }
 

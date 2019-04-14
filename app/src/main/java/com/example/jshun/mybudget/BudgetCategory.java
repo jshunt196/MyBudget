@@ -16,6 +16,22 @@ public class BudgetCategory {
 
     private ArrayList<transactionItem> transactions;
 
+    public BudgetCategory(){
+        transactions = new ArrayList<transactionItem>();
+    }
+
+    public BudgetCategory(String name, boolean isMonthly, float amount){
+        transactions = new ArrayList<transactionItem>();
+        categoryName = name;
+        this.isMonthly = isMonthly;
+        if (isMonthly){
+            setMonthlyAmount(amount);
+        }
+        else{
+            setTotalAmount(amount);
+        }
+    }
+
     public String getCategoryName() {
         return categoryName;
     }
@@ -76,7 +92,7 @@ public class BudgetCategory {
         transactions.remove(index);
         recalculate();
     }
-    
+
     private void recalculate(){
         Collections.sort(transactions);
         float runningTotal = 0;

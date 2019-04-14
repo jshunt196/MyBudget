@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class DeleteConfirm extends Activity{
 
 
-    boolean isOnce;
+    boolean isIncome;
     int arrayIndex;
 
 
@@ -29,14 +29,14 @@ public class DeleteConfirm extends Activity{
         Bundle bundle = getIntent().getExtras();
         Log.d("Pop bundle size", Integer.toString(bundle.size()));
 
-        isOnce = bundle.getBoolean("once");
+        isIncome = bundle.getBoolean("income");
         arrayIndex = bundle.getInt("index", -1);
 
         Log.d("DeleteConfirm", "got bundle");
-        BudgetItem editMe = null;
+        BudgetCategory editMe = null;
 
         if (arrayIndex > -1){
-            if (isOnce){
+            if (isIncome){
                 editMe = theStuff.incomeCategories.get(arrayIndex);
             }
             else{
@@ -47,7 +47,7 @@ public class DeleteConfirm extends Activity{
 
         final TextView titleName = findViewById(R.id.text_description);
         if (!(editMe==null)) {
-            titleName.setText("Are you sure you wish to delete " + editMe.getCategory());
+            titleName.setText("Are you sure you wish to delete " + editMe.getCategoryName());
         }
 
 
@@ -66,7 +66,7 @@ public class DeleteConfirm extends Activity{
             public void onClick(View view1) {
                 //if we already have a thing we put that back
                 if(arrayIndex > -1){
-                    if(isOnce){
+                    if(isIncome){
                         theStuff.incomeCategories.remove(arrayIndex);
                     }
                     else{

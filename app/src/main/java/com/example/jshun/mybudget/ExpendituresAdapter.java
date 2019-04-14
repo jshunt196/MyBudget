@@ -24,9 +24,9 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
 
     private Context context;
     UserSingleton mySingleton = UserSingleton.Instance();
-    ArrayList<BudgetItem> listItems;
+    ArrayList<BudgetCategory> listItems;
 
-    public ExpendituresAdapter(Context myContext, ArrayList<BudgetItem> listItems) {
+    public ExpendituresAdapter(Context myContext, ArrayList<BudgetCategory> listItems) {
         this.context = myContext;
         this.listItems = listItems;
     }
@@ -44,15 +44,15 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
         Log.d(TAG, "OnBindViewHolder: called");
         ArrayList<String> catagoryName = new ArrayList<>();
         ArrayList<Float> catagoryAmount = new ArrayList<>();
-        for (BudgetItem j : mySingleton.expenseCategories) {
-            catagoryName.add(j.getCategory());
-            catagoryAmount.add(j.getAmount());
+        for (BudgetCategory j : mySingleton.expenseCategories) {
+            catagoryName.add(j.getCategoryName());
+            catagoryAmount.add(j.getTotalAmount());
 //            System.out.println(j.getCategory());
         }
 
-        viewHolder.expName.setText(listItems.get(i).getCategory());
+        viewHolder.expName.setText(listItems.get(i).getCategoryName());
         viewHolder.expSpend.setText("$0");
-        viewHolder.expAllocate.setText(String.valueOf(listItems.get(i).getAmount()));
+        viewHolder.expAllocate.setText(String.valueOf(listItems.get(i).getTotalAmount()));
         viewHolder.expRemaining.setText("$200");
 //        final String rowNames = catagoryNames.get(i);
 
