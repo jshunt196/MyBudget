@@ -12,13 +12,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionHistory extends AppCompatActivity {
     UserSingleton theStuff = UserSingleton.Instance();
+    private String title;
+    private String spent;
+    private String budget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +50,13 @@ public class TransactionHistory extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Bundle bundle = getIntent().getExtras();
+        title = bundle.getString("RowName");
+        spent = bundle.getString("Spent");
+        budget = bundle.getString("Budget");
+
+        TextView categoryName = findViewById(R.id.categoryExp);
+        categoryName.setText(title);
     }
 }

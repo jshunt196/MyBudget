@@ -51,9 +51,9 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
         }
 
         viewHolder.expName.setText(listItems.get(i).getCategoryName());
-        viewHolder.expSpend.setText("$0");
+        viewHolder.expSpend.setText(String.valueOf(listItems.get(i).getTotalExpended()));
         viewHolder.expAllocate.setText(String.valueOf(listItems.get(i).getTotalAmount()));
-        viewHolder.expRemaining.setText("$200");
+        viewHolder.expRemaining.setText(String.valueOf(listItems.get(i).getTotalAmount()-listItems.get(i).getTotalExpended()));
 //        final String rowNames = catagoryNames.get(i);
 
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,9 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
             public void onClick(View view) {
                 Intent i = new Intent(context, TransactionHistory.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("ROW", viewHolder.expName.getText().toString());
+                bundle.putString("RowName", viewHolder.expName.getText().toString());
+                bundle.putString("Spent", viewHolder.expSpend.getText().toString());
+                bundle.putString("Budget", viewHolder.expAllocate.getText().toString());
                 i.putExtras(bundle);
                 context.startActivity(i);
             }
