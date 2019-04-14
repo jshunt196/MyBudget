@@ -59,13 +59,14 @@ public class Pop extends Activity {
 
         final EditText amountText = findViewById(R.id.amountEdit);
         if (!(editMe==null)) {
-            amountText.setText(String.valueOf(editMe.getTotalAmount()));
             if (editMe.isMonthly()){
+                amountText.setText(String.valueOf(editMe.getMonthlyAmount()));
                 RadioButton monthly = (RadioButton) findViewById(R.id.radio_monthly);
                 monthly.setChecked(true);
                 saveButton.setEnabled(true);
             }
             else{
+                amountText.setText(String.valueOf(editMe.getTotalAmount()));
                 RadioButton one_time = (RadioButton) findViewById(R.id.radio_onetime);
                 one_time.setChecked(true);
                 saveButton.setEnabled(true);
