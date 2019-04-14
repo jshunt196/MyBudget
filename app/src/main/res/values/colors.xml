@@ -6,6 +6,6 @@
     <color name="colorBackground">#e3e2df</color>
     <color name="colorPrimaryLight">#919EFF</color>
     <color name="colorButtonConfirm">#00994d</color>
-    <color name="colorButtonDelete">#ffcc0000</color>
+    <color name="colorButtonDelete">#80cc0000</color>
     <color name="colorButtonNeutral">#f79e02</color>
 </resources>
