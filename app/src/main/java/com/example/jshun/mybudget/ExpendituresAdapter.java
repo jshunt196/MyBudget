@@ -40,7 +40,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         Log.d(TAG, "OnBindViewHolder: called");
         ArrayList<String> catagoryName = new ArrayList<>();
         ArrayList<Float> catagoryAmount = new ArrayList<>();
@@ -59,12 +59,11 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(context, Pop.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("ROW", rowNames);
-//                i.putExtras(bundle);
-//                context.startActivity(i);
-                context.startActivity(new Intent(context, TransactionHistory.class));
+                Intent i = new Intent(context, TransactionHistory.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("ROW", viewHolder.expName.getText().toString());
+                i.putExtras(bundle);
+                context.startActivity(i);
             }
         });
     }
