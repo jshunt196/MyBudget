@@ -39,7 +39,7 @@ public class TransactionsActivity extends AppCompatActivity {
         float semesterIncome = theStuff.getSemesterIncome();
         float semesterExpenses = theStuff.getSemesterExpenses();
         float semesterBudgetedExpenses = theStuff.getSemsterBudgetedExpenses();
-        float remainderBudgeted = semesterExpenses - semesterBudgetedExpenses;
+        float remainderBudgeted = semesterBudgetedExpenses - semesterExpenses;
         TextView incomeView = findViewById(R.id.IncomeView);
         incomeView.setText(String.valueOf(semesterIncome));
         TextView remainder = findViewById(R.id.BudgetRemainingView);
