@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +34,10 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
     private int index;
     BudgetCategory thisBudgetCategory;
 
+    private boolean hasName;
+    private boolean hasAmt;
+    Button saveButton;
+
     public AddTransactionFrag() {
         for (BudgetCategory i : theStuff.getExpenseCategories()) {
             expensesCategories.add(i.getCategoryName());
@@ -44,6 +50,9 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
 
         setContentView(R.layout.add_transaction_layout);
 
+        hasName = false;
+        hasAmt = false;
+
         Bundle bundle = getIntent().getExtras();
         isIncome = bundle.getBoolean("income");
         index = bundle.getInt("index");
@@ -55,7 +64,53 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
         }
 
         final EditText description = findViewById(R.id.descriptionTran);
+        description.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() > 0){
+                    hasName = true;
+                    validate();
+                }
+                else{
+                    hasName = false;
+                    validate();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         final EditText amount = findViewById(R.id.amountTran);
+        amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() > 0){
+                    hasAmt = true;
+                    validate();
+                }
+                else{
+                    hasAmt = false;
+                    validate();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         CalendarView date = (CalendarView) findViewById(R.id.calendarView);
         date.setOnDateChangeListener( new CalendarView.OnDateChangeListener() {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -70,7 +125,8 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
         spinner.setSelection(index);
         spinner.setOnItemSelectedListener(AddTransactionFrag.this);
 
-        Button saveButton = findViewById(R.id.saveTransaction);
+        saveButton = findViewById(R.id.saveTransaction);
+        saveButton.setEnabled(false);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
@@ -108,6 +164,15 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private void validate(){
+        if (hasName && hasAmt) {
+            saveButton.setEnabled(true);
+        }
+        else{
+            saveButton.setEnabled(false);
+        }
     }
 
 //    @Override
