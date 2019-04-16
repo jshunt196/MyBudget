@@ -26,6 +26,7 @@ public class TransactionHistory extends AppCompatActivity {
     private String title;
     private int spent;
     private int budget;
+    private ArrayList<transactionItem> transactionsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,21 @@ public class TransactionHistory extends AppCompatActivity {
 
         setContentView(R.layout.layout_tranhist);
 
-        /*RecyclerView recyclerExpenditures = findViewById(R.id.expRecycler);
-        recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, expenseCategories));
+        Bundle bundle = getIntent().getExtras();
+        title = bundle.getString("RowName");
+
+        for (BudgetCategory i : theStuff.getExpenseCategories()) {
+            if (i.getCategoryName().equals(title)) {
+                transactionsList = i.getTransactions();
+            }
+        }
+
+        RecyclerView recyclerExpenditures = findViewById(R.id.historyRecycler);
+        recyclerExpenditures.setAdapter(new HistoryAdapter(this, transactionsList));
         recyclerExpenditures.setLayoutManager(new LinearLayoutManager(this));
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        recyclerExpenditures.addItemDecoration(itemDecoration);*/
+        recyclerExpenditures.addItemDecoration(itemDecoration);
 
         Button addTransactionButton = findViewById(R.id.addTranHistButton);
         addTransactionButton.setEnabled(true);
@@ -52,8 +62,6 @@ public class TransactionHistory extends AppCompatActivity {
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
-        title = bundle.getString("RowName");
         spent = bundle.getInt("Spent");
         budget = bundle.getInt("Budget");
 
@@ -64,8 +72,10 @@ public class TransactionHistory extends AppCompatActivity {
         categoryName.setText(title);
         categorySpent.setText("$"+String.valueOf(spent));
         categoryBudget.setText("$"+String.valueOf(budget));
-        float progressAmount = spent / budget * 100;
+        float floatSpent = spent;
+        float floatBudget = budget;
+        float progressAmount = floatSpent / floatBudget;
+        progressAmount *= 100;
         categoryProgress.setProgress(Math.round(progressAmount));
-
     }
 }

@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
 public class AddTransactionFrag extends Activity implements AdapterView.OnItemSelectedListener {
     UserSingleton theStuff = UserSingleton.Instance();
     private List<String> expensesCategories = new ArrayList<String>();;
-    private Date calendarDate;
+    private Date calendarDate = Calendar.getInstance().getTime();
 
     public AddTransactionFrag() {
         for (BudgetCategory i : theStuff.getExpenseCategories()) {
@@ -65,7 +66,7 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
                 newItem.setAmount(Float.valueOf(amount.getText().toString()));
                 newItem.setDate(calendarDate);
                 for (BudgetCategory myItem : theStuff.getExpenseCategories()) {
-                    if (myItem.getCategoryName() == spinnerString) {
+                    if (myItem.getCategoryName().equals(spinnerString)) {
                         myItem.addTransaction(newItem);
                     }
                 }

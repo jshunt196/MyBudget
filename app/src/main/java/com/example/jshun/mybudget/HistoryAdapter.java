@@ -15,13 +15,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
     private Context context;
     private String title;
+    private ArrayList<transactionItem> listTransactions;
 
-    public HistoryAdapter(Context myContext) {
+    public HistoryAdapter(Context myContext, ArrayList<transactionItem> transactions) {
         context = myContext;
+        listTransactions = transactions;
     }
 
     @NonNull
@@ -37,11 +41,21 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 //        viewHolder...setText(listItems.get(pos).getCategory() + ": $");
 //        viewHolder.itemAmount.setText(String.valueOf(listItems.get(pos).getAmount()) + " per semester");
+        viewHolder.tranTitle.setText(listTransactions.get(i).getName());
+        float mehFloat = listTransactions.get(i).getAmount();
+        viewHolder.tranAmount.setText("$" + String.format("%.2f", mehFloat));
+
+        int year = listTransactions.get(i).getDate().getYear();
+        int month = listTransactions.get(i).getDate().getMonth();
+        int day = listTransactions.get(i).getDate().getDate();
+
+        String myDate = String.valueOf(month) + "/" + String.valueOf(day) + "/" + String.valueOf(year).substring(String.valueOf(year).length() - 2);
+        viewHolder.tranDate.setText(myDate);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listTransactions.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
