@@ -39,7 +39,7 @@ public class TransactionsActivity extends AppCompatActivity {
         float semesterIncome = theStuff.getSemesterIncome();
         float semesterExpenses = theStuff.getSemesterExpenses();
         float semesterBudgetedExpenses = theStuff.getSemsterBudgetedExpenses();
-        float remainderBudgeted = semesterExpenses - semesterBudgetedExpenses;
+        float remainderBudgeted = semesterBudgetedExpenses - semesterExpenses;
         TextView incomeView = findViewById(R.id.IncomeView);
         incomeView.setText(String.valueOf(semesterIncome));
         TextView remainder = findViewById(R.id.BudgetRemainingView);
@@ -62,6 +62,10 @@ public class TransactionsActivity extends AppCompatActivity {
                 //Toast toast = Toast.makeText(getApplicationContext(), "Finished!!!", Toast.LENGTH_LONG);
                 //toast.show();
                 Intent i = new Intent(TransactionsActivity.this, AddTransactionFrag.class);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("income", false);
+                bundle.putInt("index", 0);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });
