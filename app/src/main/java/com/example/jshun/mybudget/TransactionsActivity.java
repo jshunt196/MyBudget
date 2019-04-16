@@ -36,7 +36,7 @@ public class TransactionsActivity extends AppCompatActivity {
         setContentView(R.layout.transactions_activity);
 
         RecyclerView recyclerExpenditures = findViewById(R.id.expRecycler);
-        recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, expenseCategories));
+        recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, false));
         recyclerExpenditures.setLayoutManager(new LinearLayoutManager(this));
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL);

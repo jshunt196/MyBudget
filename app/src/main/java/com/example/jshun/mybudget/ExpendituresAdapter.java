@@ -27,10 +27,17 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
     private Context context;
     UserSingleton mySingleton = UserSingleton.Instance();
     ArrayList<BudgetCategory> listItems;
+    private boolean isIncome;
 
-    public ExpendituresAdapter(Context myContext, ArrayList<BudgetCategory> listItems) {
+    public ExpendituresAdapter(Context myContext, boolean isIncome) {
         this.context = myContext;
-        this.listItems = listItems;
+        this.isIncome = isIncome;
+        if (isIncome){
+            this.listItems = mySingleton.getIncomeCategories();
+        }
+        else {
+            this.listItems = mySingleton.getExpenseCategories();
+        }
     }
 
     @NonNull
@@ -42,7 +49,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
         Log.d(TAG, "OnBindViewHolder: called");
         ArrayList<String> catagoryName = new ArrayList<>();
         ArrayList<Float> catagoryAmount = new ArrayList<>();
@@ -81,13 +88,17 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, TransactionHistory.class);
+                Intent intent = new Intent(context, TransactionHistory.class);
                 Bundle bundle = new Bundle();
+                bundle.putBoolean("income", isIncome);
+                bundle.putInt("index", i);
+                /*
                 bundle.putString("RowName", expName);
                 bundle.putInt("Spent", intSpent);
                 bundle.putInt("Budget", intAllocate);
-                i.putExtras(bundle);
-                context.startActivity(i);
+                */
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }

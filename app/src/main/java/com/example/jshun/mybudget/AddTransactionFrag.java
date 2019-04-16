@@ -27,6 +27,9 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
     UserSingleton theStuff = UserSingleton.Instance();
     private List<String> expensesCategories = new ArrayList<String>();;
     private Date calendarDate;
+    private boolean isIncome;
+    private int index;
+    BudgetCategory thisBudgetCategory;
 
     public AddTransactionFrag() {
         for (BudgetCategory i : theStuff.getExpenseCategories()) {
@@ -39,6 +42,16 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.add_transaction_layout);
+
+        Bundle bundle = getIntent().getExtras();
+        isIncome = bundle.getBoolean("income");
+        index = bundle.getInt("index");
+        if(isIncome){
+            thisBudgetCategory = theStuff.incomeCategories.get(index);
+        }
+        else {
+            thisBudgetCategory = theStuff.expenseCategories.get(index);
+        }
 
         final EditText description = findViewById(R.id.descriptionTran);
         final EditText amount = findViewById(R.id.amountTran);
@@ -54,6 +67,7 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(AddTransactionFrag.this);
+        spinner.setSelection(index);
         final String spinnerString = spinner.getSelectedItem().toString();
 
         Button saveButton = findViewById(R.id.saveTransaction);
