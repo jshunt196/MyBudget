@@ -2,6 +2,7 @@ package com.example.jshun.mybudget;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,10 +52,30 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
 //            System.out.println(j.getCategory());
         }
 
-        viewHolder.expName.setText(listItems.get(i).getCategoryName());
-        viewHolder.expSpend.setText(String.valueOf(listItems.get(i).getTotalExpended()));
-        viewHolder.expAllocate.setText(String.valueOf(listItems.get(i).getTotalAmount()));
-        viewHolder.expRemaining.setText(String.valueOf(listItems.get(i).getTotalAmount()-listItems.get(i).getTotalExpended()));
+        final String expName = listItems.get(i).getCategoryName();
+        final String stringSpent = "$"+String.format("%.2f", listItems.get(i).getTotalExpended());
+        final int intSpent = Math.round(listItems.get(i).getTotalExpended());
+        final String expAllocate = "$"+String.format("%.2f", listItems.get(i).getTotalAmount());
+        final int intAllocate = Math.round(listItems.get(i).getTotalAmount());
+
+        viewHolder.expName.setText(expName);
+        viewHolder.expSpend.setText(stringSpent);
+        viewHolder.expAllocate.setText(expAllocate);
+        float remaining = listItems.get(i).getAmountRemaining();
+
+        final String expRemaining = "$" + String.format("%.2f", remaining);
+        if (remaining > 0) {
+            viewHolder.expRemaining.setTextColor(Color.parseColor("#4CAF50")); ///////////////////////////////////////////// FIX ME!!
+        }
+        else if (remaining < 0) {
+            viewHolder.expRemaining.setTextColor(Color.parseColor("#F44336"));
+        }
+        viewHolder.expRemaining.setText(expRemaining);
+        float exp = listItems.get(i).getTotalExpended();
+        float total = listItems.get(i).getTotalAmount();
+        float progress = exp/total*100;
+        int valueStuff = Math.round(progress);
+        viewHolder.expProgress.setProgress(valueStuff);
 //        final String rowNames = catagoryNames.get(i);
 
         viewHolder.myRow.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +83,9 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
             public void onClick(View view) {
                 Intent i = new Intent(context, TransactionHistory.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("RowName", viewHolder.expName.getText().toString());
-                bundle.putString("Spent", viewHolder.expSpend.getText().toString());
-                bundle.putString("Budget", viewHolder.expAllocate.getText().toString());
+                bundle.putString("RowName", expName);
+                bundle.putInt("Spent", intSpent);
+                bundle.putInt("Budget", intAllocate);
                 i.putExtras(bundle);
                 context.startActivity(i);
             }
@@ -82,6 +104,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
         TextView expAllocate;
         TextView expRemaining;
         LinearLayout myRow;
+        ProgressBar expProgress;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -90,6 +113,7 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
             expAllocate = itemView.findViewById(R.id.expAllocate);
             expRemaining = itemView.findViewById(R.id.expRemain);
             myRow = itemView.findViewById(R.id.expRow);
+            expProgress = itemView.findViewById(R.id.expProgress);
         }
     }
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +24,8 @@ import java.util.List;
 public class TransactionHistory extends AppCompatActivity {
     UserSingleton theStuff = UserSingleton.Instance();
     private String title;
-    private String spent;
-    private String budget;
+    private int spent;
+    private int budget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +54,18 @@ public class TransactionHistory extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         title = bundle.getString("RowName");
-        spent = bundle.getString("Spent");
-        budget = bundle.getString("Budget");
+        spent = bundle.getInt("Spent");
+        budget = bundle.getInt("Budget");
 
         TextView categoryName = findViewById(R.id.categoryExp);
         TextView categorySpent = findViewById(R.id.spentCat);
         TextView categoryBudget = findViewById(R.id.budgetCat);
+        ProgressBar categoryProgress = findViewById(R.id.transactionProgress);
         categoryName.setText(title);
-        categorySpent.setText(spent);
-        categoryBudget.setText(budget);
+        categorySpent.setText("$"+String.valueOf(spent));
+        categoryBudget.setText("$"+String.valueOf(budget));
+        float progressAmount = spent / budget * 100;
+        categoryProgress.setProgress(Math.round(progressAmount));
+
     }
 }

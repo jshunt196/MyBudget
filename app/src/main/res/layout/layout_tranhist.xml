@@ -43,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="left"
-                        android:text="You Spent: $" />
+                        android:text="You Spent:" />
 
                     <TextView
                         android:id="@+id/spentCat"
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="right"
-                        android:text="Budget: $" />
+                        android:text="Budget:" />
 
                     <TextView
                         android:id="@+id/budgetCat"
@@ -79,7 +79,7 @@
 
         </LinearLayout>
         <ProgressBar
-            android:id="@+id/progressBar2"
+            android:id="@+id/transactionProgress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -87,7 +87,8 @@
             tools:layout_editor_absoluteY="46dp"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:progressTint="@color/colorProgress"/>
 
         <LinearLayout
             android:layout_width="match_parent"
