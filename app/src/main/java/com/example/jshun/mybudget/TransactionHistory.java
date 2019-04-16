@@ -24,9 +24,12 @@ import java.util.List;
 public class TransactionHistory extends AppCompatActivity {
     UserSingleton theStuff = UserSingleton.Instance();
     private String title;
-    private int spent;
-    private int budget;
+    private float spent;
+    private float budget;
     private ArrayList<transactionItem> transactionsList = new ArrayList<>();
+    private boolean isIncome;
+    private int index;
+    BudgetCategory thisBudgetCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,21 @@ public class TransactionHistory extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerExpenditures.addItemDecoration(itemDecoration);
+        isIncome = bundle.getBoolean("income");
+        index = bundle.getInt("index");
+        if(isIncome){
+            thisBudgetCategory = theStuff.incomeCategories.get(index);
+        }
+        else {
+            thisBudgetCategory = theStuff.expenseCategories.get(index);
+        }
+
+        /*RecyclerView recyclerExpenditures = findViewById(R.id.expRecycler);
+        recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, expenseCategories));
+        recyclerExpenditures.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.ItemDecoration itemDecoration = new
+                DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerExpenditures.addItemDecoration(itemDecoration);*/
 
         Button addTransactionButton = findViewById(R.id.addTranHistButton);
         addTransactionButton.setEnabled(true);
@@ -58,12 +76,17 @@ public class TransactionHistory extends AppCompatActivity {
                 //Toast toast = Toast.makeText(getApplicationContext(), "Finished!!!", Toast.LENGTH_LONG);
                 //toast.show();
                 Intent i = new Intent(TransactionHistory.this, AddTransactionFrag.class);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("income", isIncome);
+                bundle.putInt("index", index);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });
 
-        spent = bundle.getInt("Spent");
-        budget = bundle.getInt("Budget");
+        title = thisBudgetCategory.getCategoryName();
+        budget = thisBudgetCategory.getTotalAmount();
+        spent = thisBudgetCategory.getTotalExpended();
 
         TextView categoryName = findViewById(R.id.categoryExp);
         TextView categorySpent = findViewById(R.id.spentCat);
@@ -72,10 +95,7 @@ public class TransactionHistory extends AppCompatActivity {
         categoryName.setText(title);
         categorySpent.setText("$"+String.valueOf(spent));
         categoryBudget.setText("$"+String.valueOf(budget));
-        float floatSpent = spent;
-        float floatBudget = budget;
-        float progressAmount = floatSpent / floatBudget;
-        progressAmount *= 100;
+        float progressAmount = spent / budget * 100;
         categoryProgress.setProgress(Math.round(progressAmount));
     }
 }

@@ -48,4 +48,26 @@ public class UserSingleton {
         }
         return instance;
     }
+
+    public float getSemesterIncome(){
+        float totalIncome = 0;
+        for (BudgetCategory current : incomeCategories){
+            totalIncome += current.getTotalAmount();
+        }
+        return totalIncome;
+    }
+    public float getSemsterBudgetedExpenses(){
+        float totalBudgetedExpenses = 0;
+        for (BudgetCategory current : expenseCategories){
+            totalBudgetedExpenses += current.getTotalAmount();
+        }
+        return totalBudgetedExpenses;
+    }
+    public float getSemesterExpenses(){
+        float totalExpenses = 0;
+        for (BudgetCategory current : expenseCategories){
+            totalExpenses += current.getTotalExpended();
+        }
+        return totalExpenses;
+    }
 }
