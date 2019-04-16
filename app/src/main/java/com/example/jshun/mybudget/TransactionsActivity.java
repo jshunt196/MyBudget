@@ -1,6 +1,7 @@
 package com.example.jshun.mybudget;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -43,6 +44,12 @@ public class TransactionsActivity extends AppCompatActivity {
         TextView incomeView = findViewById(R.id.IncomeView);
         incomeView.setText(String.valueOf(semesterIncome));
         TextView remainder = findViewById(R.id.BudgetRemainingView);
+        if (remainderBudgeted > 0) {
+            remainder.setTextColor(Color.parseColor("#4CAF50"));
+        }
+        else if (remainderBudgeted < 0) {
+            remainder.setTextColor(Color.parseColor("#F44336"));
+        }
         remainder.setText(String.valueOf(remainderBudgeted));
         TextView totalBudgeted = findViewById(R.id.totalBudgetedView);
         totalBudgeted.setText(String.valueOf(semesterBudgetedExpenses));
