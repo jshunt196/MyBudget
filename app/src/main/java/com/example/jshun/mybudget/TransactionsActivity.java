@@ -59,9 +59,11 @@ public class TransactionsActivity extends AppCompatActivity {
         addTransactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
-                //Toast toast = Toast.makeText(getApplicationContext(), "Finished!!!", Toast.LENGTH_LONG);
-                //toast.show();
                 Intent i = new Intent(TransactionsActivity.this, AddTransactionFrag.class);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("income", false);
+                bundle.putInt("index", 0);
+                i.putExtras(bundle);
                 startActivity(i);
             }
         });

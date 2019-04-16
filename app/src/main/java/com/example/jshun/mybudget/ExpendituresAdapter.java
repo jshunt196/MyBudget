@@ -92,11 +92,9 @@ public class ExpendituresAdapter extends RecyclerView.Adapter<ExpendituresAdapte
                 Bundle bundle = new Bundle();
                 bundle.putBoolean("income", isIncome);
                 bundle.putInt("index", i);
-                /*
                 bundle.putString("RowName", expName);
                 bundle.putInt("Spent", intSpent);
                 bundle.putInt("Budget", intAllocate);
-                */
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

@@ -43,6 +43,7 @@ public class TransactionHistory extends AppCompatActivity {
         for (BudgetCategory i : theStuff.getExpenseCategories()) {
             if (i.getCategoryName().equals(title)) {
                 transactionsList = i.getTransactions();
+                break;
             }
         }
 
