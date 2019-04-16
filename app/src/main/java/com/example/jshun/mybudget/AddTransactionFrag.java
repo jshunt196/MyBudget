@@ -63,18 +63,18 @@ public class AddTransactionFrag extends Activity implements AdapterView.OnItemSe
             }
         });
 
-        Spinner spinner = findViewById(R.id.categorySpin);
+        final Spinner spinner = findViewById(R.id.categorySpin);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, expensesCategories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(AddTransactionFrag.this);
         spinner.setSelection(index);
-        final String spinnerString = spinner.getSelectedItem().toString();
+        spinner.setOnItemSelectedListener(AddTransactionFrag.this);
 
         Button saveButton = findViewById(R.id.saveTransaction);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
+                final String spinnerString = spinner.getSelectedItem().toString();
                 transactionItem newItem = new transactionItem();
                 newItem.setName(description.getText().toString());
                 newItem.setAmount(Float.valueOf(amount.getText().toString()));
