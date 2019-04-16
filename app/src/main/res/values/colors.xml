@@ -11,6 +11,7 @@
     <color name="colorButtonConfirm">#dff79e02</color>
     <color name="colorButtonDelete">#80cc0000</color>
     <color name="colorButtonNeutral">#cdf79e02</color>
+    <color name="colorButtonGray">#8c8c8c</color>
     <color name="colorProgress">#cdf79e02</color>
     <color name="colorPositiveBalance">#4CAF50</color>
     <color name="colorNegativeBalance">#F44336</color>
