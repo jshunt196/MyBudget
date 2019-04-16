@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import java.util.ArrayList;
@@ -34,6 +35,17 @@ public class TransactionsActivity extends AppCompatActivity {
 
         // TODO: stuff here!
         setContentView(R.layout.transactions_activity);
+
+        float semesterIncome = theStuff.getSemesterIncome();
+        float semesterExpenses = theStuff.getSemesterExpenses();
+        float semesterBudgetedExpenses = theStuff.getSemsterBudgetedExpenses();
+        float remainderBudgeted = semesterExpenses - semesterBudgetedExpenses;
+        TextView incomeView = findViewById(R.id.IncomeView);
+        incomeView.setText(String.valueOf(semesterIncome));
+        TextView remainder = findViewById(R.id.BudgetRemainingView);
+        remainder.setText(String.valueOf(remainderBudgeted));
+        TextView totalBudgeted = findViewById(R.id.totalBudgetedView);
+        totalBudgeted.setText(String.valueOf(semesterBudgetedExpenses));
 
         RecyclerView recyclerExpenditures = findViewById(R.id.expRecycler);
         recyclerExpenditures.setAdapter(new ExpendituresAdapter(this, false));
